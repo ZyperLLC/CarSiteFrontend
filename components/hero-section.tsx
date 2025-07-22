@@ -8,19 +8,23 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div>
-            {/* Main Heading - Edit title here */}
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Buy & Sell cars in TTRidz</h1>
-
-            {/* Subtitle - Edit description here */}
-            <p className="text-xl text-gray-600 mb-8">Browse through hundreds of used and new cars for sale</p>
-
+            {/* Main Heading - Inter ExtraBold */}
+            <h1 className="text-4xl lg:text-5xl font-extrabold text-black-900 mb-4">
+              Buy & Sell cars in TTRidz
+            </h1>
+  
+            {/* Subtitle - Inter SemiBold */}
+            <p className="text-xl font-semibold text-black-900 mb-8">
+              Browse through hundreds of used and new cars for sale
+            </p>
+  
             {/* Filter Tabs */}
             <FilterTabs />
-
+  
             {/* Search Form */}
             <SearchForm />
           </div>
-
+  
           {/* Right Content - Car Image */}
           <div className="relative">
             <img

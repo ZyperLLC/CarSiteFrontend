@@ -24,7 +24,7 @@ export default function FeaturedListings() {
       location: "San Fernando",
       year: 2019,
       price: "$180,000",
-      image: "/car2.jpg?height=200&width=300",
+      image: "/car3.jpg?height=200&width=300",
     },
     {
       id: 3,
@@ -77,7 +77,7 @@ export default function FeaturedListings() {
       location: "San Fernando",
       year: 2018,
       price: "$180,000",
-      image: "/car2.jpg?height=200&width=300",
+      image: "/car3.jpg?height=200&width=300",
     },
   ]
 
