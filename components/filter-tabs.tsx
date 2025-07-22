@@ -3,7 +3,6 @@
 import { useState } from "react"
 
 export default function FilterTabs() {
-  // Add/remove filter options here
   const filters = [
     "SUVs under $200k",
     "Used Sedans",
@@ -14,7 +13,8 @@ export default function FilterTabs() {
     "Trucks",
   ]
 
-  const [activeFilter, setActiveFilter] = useState("SUVs under $200k")
+  // Optional: can remove state if not needed anymore
+  const [activeFilter, setActiveFilter] = useState("")
 
   return (
     <div className="flex flex-wrap gap-3 mb-8">
@@ -22,11 +22,7 @@ export default function FilterTabs() {
         <button
           key={filter}
           onClick={() => setActiveFilter(filter)}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            activeFilter === filter
-              ? "bg-blue-100 text-blue-700 border border-blue-200"
-              : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-          }`}
+          className="px-4 py-2 rounded-md text-sm font-medium border border-gray-200 bg-white text-[#0e3087] hover:bg-gray-50 transition-colors"
         >
           {filter}
         </button>

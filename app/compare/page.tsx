@@ -7,7 +7,6 @@ import { X, Plus, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
 export default function ComparePage() {
-  // Sample compare data - In real app, this would come from state management
   const [compareList, setCompareList] = useState([
     {
       id: 1,
@@ -51,16 +50,15 @@ export default function ComparePage() {
     setCompareList(compareList.filter((car) => car.id !== id))
   }
 
-  const maxCompareItems = 4
+  const maxCompareItems = 2
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+          <div className="flex items-center flex-wrap gap-4">
             <Link href="/browse">
               <Button variant="outline" size="sm" className="bg-transparent">
                 <ArrowLeft className="w-4 h-4 mr-2" />
@@ -77,8 +75,8 @@ export default function ComparePage() {
           </div>
         </div>
 
+        {/* Empty State */}
         {compareList.length === 0 ? (
-          /* Empty State */
           <div className="text-center py-16">
             <div className="bg-gray-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
               <Plus className="w-12 h-12 text-gray-400" />
@@ -90,16 +88,15 @@ export default function ComparePage() {
             </Link>
           </div>
         ) : (
-          /* Compare Table */
-          <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                {/* Car Images and Basic Info */}
+          <>
+            {/* Desktop Compare Table */}
+            <div className="hidden md:block bg-white rounded-lg shadow-sm border overflow-x-auto">
+              <table className="min-w-full table-auto">
                 <thead>
                   <tr className="border-b">
                     <td className="p-4 font-medium text-gray-900 w-48">Car</td>
                     {compareList.map((car) => (
-                      <td key={car.id} className="p-4 text-center min-w-[250px]">
+                      <td key={car.id} className="p-4 text-center min-w-[250px] align-top">
                         <div className="relative">
                           <button
                             onClick={() => removeFromCompare(car.id)}
@@ -107,11 +104,7 @@ export default function ComparePage() {
                           >
                             <X className="w-3 h-3" />
                           </button>
-                          <img
-                            src={car.image || "/placeholder.svg"}
-                            alt={car.name}
-                            className="w-full h-32 object-cover rounded-lg mb-3"
-                          />
+                          <img src={car.image} alt={car.name} className="w-full h-32 object-cover rounded-lg mb-3" />
                           <h3 className="font-semibold text-gray-900">{car.name}</h3>
                           <p className="text-sm text-gray-600">
                             {car.location} • {car.year}
@@ -120,23 +113,8 @@ export default function ComparePage() {
                         </div>
                       </td>
                     ))}
-                    {/* Add more cars slots */}
-                    {Array.from({ length: maxCompareItems - compareList.length }).map((_, index) => (
-                      <td key={`empty-${index}`} className="p-4 text-center min-w-[250px]">
-                        <Link href="/browse">
-                          <div className="border-2 border-dashed border-gray-300 rounded-lg h-32 flex items-center justify-center hover:border-blue-400 cursor-pointer">
-                            <div className="text-center">
-                              <Plus className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                              <p className="text-sm text-gray-500">Add Car</p>
-                            </div>
-                          </div>
-                        </Link>
-                      </td>
-                    ))}
                   </tr>
                 </thead>
-
-                {/* Specifications Comparison */}
                 <tbody>
                   {[
                     { label: "Engine", key: "engine" },
@@ -151,13 +129,8 @@ export default function ComparePage() {
                     <tr key={spec.key} className="border-b hover:bg-gray-50">
                       <td className="p-4 font-medium text-gray-900">{spec.label}</td>
                       {compareList.map((car) => (
-                        <td key={car.id} className="p-4 text-center text-gray-600">
+                        <td key={car.id} className="p-4 text-center text-gray-600 min-w-[250px]">
                           {car.specs[spec.key as keyof typeof car.specs] || "N/A"}
-                        </td>
-                      ))}
-                      {Array.from({ length: maxCompareItems - compareList.length }).map((_, index) => (
-                        <td key={`empty-spec-${index}`} className="p-4 text-center text-gray-400">
-                          -
                         </td>
                       ))}
                     </tr>
@@ -166,17 +139,48 @@ export default function ComparePage() {
               </table>
             </div>
 
-            {/* Action Buttons */}
-            <div className="p-6 bg-gray-50 border-t">
-              <div className="flex flex-wrap gap-4">
-                {compareList.map((car) => (
-                  <Link key={car.id} href={`/car/${car.id}`}>
-                    <Button variant="outline" className="bg-white">
-                      View {car.name} Details
-                    </Button>
-                  </Link>
-                ))}
-              </div>
+            {/* Mobile Stacked View */}
+            <div className="md:hidden space-y-6">
+              {compareList.map((car) => (
+                <div key={car.id} className="bg-white rounded-lg shadow-sm border p-4">
+                  <div className="flex justify-between items-start mb-3">
+                    <h3 className="text-xl font-semibold text-gray-900">{car.name}</h3>
+                    <button
+                      onClick={() => removeFromCompare(car.id)}
+                      className="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                  <img src={car.image} alt={car.name} className="w-full h-40 object-cover rounded-lg mb-3" />
+                  <p className="text-gray-600">{car.location} • {car.year}</p>
+                  <p className="text-lg font-bold text-blue-600 mb-3">{car.price}</p>
+
+                  <div className="grid grid-cols-2 gap-4 text-sm text-gray-700">
+                    {Object.entries(car.specs).map(([label, value]) => (
+                      <div key={label}>
+                        <span className="font-medium capitalize">{label.replace(/([A-Z])/g, ' $1')}:</span>{" "}
+                        <span className="text-gray-600">{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Action Buttons */}
+        {compareList.length > 0 && (
+          <div className="p-6 bg-gray-50 border-t mt-4">
+            <div className="flex flex-wrap gap-4">
+              {compareList.map((car) => (
+                <Link key={car.id} href={`/car/${car.id}`}>
+                  <Button variant="outline" className="bg-white">
+                    View {car.name} Details
+                  </Button>
+                </Link>
+              ))}
             </div>
           </div>
         )}
