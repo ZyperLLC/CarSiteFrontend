@@ -14,7 +14,7 @@ export default function ComparePage() {
       location: "San Fernando",
       year: 2019,
       price: "$180,000",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/car3.jpg",
       specs: {
         engine: "2.0L Petrol",
         transmission: "Automatic",
@@ -32,7 +32,7 @@ export default function ComparePage() {
       location: "Port of Spain",
       year: 2020,
       price: "$195,000",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "/car2.jpg",
       specs: {
         engine: "1.5L Turbo",
         transmission: "CVT",
@@ -93,10 +93,13 @@ export default function ComparePage() {
             <div className="hidden md:block bg-white rounded-lg shadow-sm border overflow-x-auto">
               <table className="min-w-full table-auto">
                 <thead>
-                  <tr className="border-b">
-                    <td className="p-4 font-medium text-gray-900 w-48">Car</td>
+                  <tr className="border-b align-top">
+                    <td className="p-4 font-medium text-gray-900 w-48 align-top">Car</td>
                     {compareList.map((car) => (
-                      <td key={car.id} className="p-4 text-center min-w-[250px] align-top">
+                      <td
+                        key={car.id}
+                        className="p-4 text-center align-top min-w-[300px] w-[300px]"
+                      >
                         <div className="relative">
                           <button
                             onClick={() => removeFromCompare(car.id)}
@@ -104,7 +107,13 @@ export default function ComparePage() {
                           >
                             <X className="w-3 h-3" />
                           </button>
-                          <img src={car.image} alt={car.name} className="w-full h-32 object-cover rounded-lg mb-3" />
+                          <div className="w-full h-48 flex items-center justify-center bg-gray-100 rounded-lg mb-3 overflow-hidden">
+                            <img
+                              src={car.image}
+                              alt={car.name}
+                              className="max-h-full object-contain"
+                            />
+                          </div>
                           <h3 className="font-semibold text-gray-900">{car.name}</h3>
                           <p className="text-sm text-gray-600">
                             {car.location} • {car.year}
@@ -126,10 +135,13 @@ export default function ComparePage() {
                     { label: "Seats", key: "seats" },
                     { label: "Condition", key: "condition" },
                   ].map((spec) => (
-                    <tr key={spec.key} className="border-b hover:bg-gray-50">
+                    <tr key={spec.key} className="border-b hover:bg-gray-50 align-top">
                       <td className="p-4 font-medium text-gray-900">{spec.label}</td>
                       {compareList.map((car) => (
-                        <td key={car.id} className="p-4 text-center text-gray-600 min-w-[250px]">
+                        <td
+                          key={car.id}
+                          className="p-4 text-center text-gray-600 min-w-[300px] align-top"
+                        >
                           {car.specs[spec.key as keyof typeof car.specs] || "N/A"}
                         </td>
                       ))}
@@ -139,30 +151,35 @@ export default function ComparePage() {
               </table>
             </div>
 
-            {/* Mobile Stacked View */}
-            <div className="md:hidden space-y-6">
+            {/* Mobile Compare Grid */}
+            <div className="md:hidden grid grid-cols-2 gap-4">
               {compareList.map((car) => (
-                <div key={car.id} className="bg-white rounded-lg shadow-sm border p-4">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-semibold text-gray-900">{car.name}</h3>
+                <div key={car.id} className="bg-white rounded-lg shadow-sm border p-3 flex flex-col items-center">
+                  <div className="relative w-full">
                     <button
                       onClick={() => removeFromCompare(car.id)}
-                      className="bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+                      className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center hover:bg-red-600 z-10"
                     >
                       <X className="w-3 h-3" />
                     </button>
+                    <img
+                      src={car.image}
+                      alt={car.name}
+                      className="w-full h-36 object-contain rounded-lg mb-2"
+                    />
                   </div>
-                  <img src={car.image} alt={car.name} className="w-full h-40 object-cover rounded-lg mb-3" />
-                  <p className="text-gray-600">{car.location} • {car.year}</p>
-                  <p className="text-lg font-bold text-blue-600 mb-3">{car.price}</p>
-
-                  <div className="grid grid-cols-2 gap-4 text-sm text-gray-700">
-                    {Object.entries(car.specs).map(([label, value]) => (
-                      <div key={label}>
-                        <span className="font-medium capitalize">{label.replace(/([A-Z])/g, ' $1')}:</span>{" "}
-                        <span className="text-gray-600">{value}</span>
-                      </div>
-                    ))}
+                  <h3 className="text-sm font-semibold text-center text-gray-900">{car.name}</h3>
+                  <p className="text-xs text-gray-600 text-center">{car.location} • {car.year}</p>
+                  <p className="text-sm font-bold text-blue-600 mt-1">{car.price}</p>
+                  <div className="mt-2 text-xs text-gray-700 w-full">
+                    <p><strong>Engine:</strong> {car.specs.engine}</p>
+                    <p><strong>Transmission:</strong> {car.specs.transmission}</p>
+                    <p><strong>Drivetrain:</strong> {car.specs.drivetrain}</p>
+                    <p><strong>Mileage:</strong> {car.specs.mileage}</p>
+                    <p><strong>Fuel Type:</strong> {car.specs.fuelType}</p>
+                    <p><strong>Doors:</strong> {car.specs.doors}</p>
+                    <p><strong>Seats:</strong> {car.specs.seats}</p>
+                    <p><strong>Condition:</strong> {car.specs.condition}</p>
                   </div>
                 </div>
               ))}

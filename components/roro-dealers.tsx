@@ -116,7 +116,7 @@ export default function RoRoDealers() {
 
               <p className="text-gray-600 mb-6">{dealer.description}</p>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {dealer.cars.map((car, index) => {
                   const key = `${dealer.id}-${index}`
                   const isHovered = hoveredIndex === key
@@ -133,11 +133,11 @@ export default function RoRoDealers() {
                       }}
                     >
                       <Link href={`/car/${key}`}>
-                        <div className="relative h-48 overflow-hidden">
+                        <div className="relative w-full min-h-[150px] bg-white flex items-center justify-center overflow-hidden">
                           <img
                             src={car.image || "/placeholder.svg"}
                             alt={car.name}
-                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                            className="w-full h-auto object-contain transition-transform duration-300 hover:scale-105"
                           />
                         </div>
                       </Link>
