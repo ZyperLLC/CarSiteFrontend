@@ -32,7 +32,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
     id: 1,
     name: "Premium Auto Imports",
     // DEALER LOGO - Replace with actual high-resolution logo
-    logo: "/placeholder.svg?height=100&width=200",
+    logo: "/dealerlogo.jpg?height=100&width=200",
     // DEALER BANNER - Add a banner image for the storefront
     bannerImage: "/placeholder.svg?height=300&width=1200",
     verified: true,
@@ -96,22 +96,22 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
         year: 2020,
         price: "$95,000",
         // CAR IMAGES - Replace with actual car photos
-        image: "/placeholder.svg?height=200&width=300",
+        image: "/car1.jpg?height=200&width=300",
         condition: "Used",
         mileage: "25,000 km",
         featured: false,
       },
       {
         id: 2,
-        name: "Honda Vezel",
+        name: "Toyota Prius",
         location: "Port of Spain",
-        year: 2019,
-        price: "$120,000",
+        year: 2020,
+        price: "$95,000",
         // CAR IMAGES - Replace with actual car photos
-        image: "/placeholder.svg?height=200&width=300",
+        image: "/car4.jpg?height=200&width=300",
         condition: "Used",
-        mileage: "30,000 km",
-        featured: true, // This will show as featured card
+        mileage: "25,000 km",
+        featured: false,
       },
       {
         id: 3,
@@ -120,7 +120,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
         year: 2021,
         price: "$85,000",
         // CAR IMAGES - Replace with actual car photos
-        image: "/placeholder.svg?height=200&width=300",
+        image: "/car3.jpg?height=200&width=300",
         condition: "Used",
         mileage: "18,000 km",
         featured: false,
@@ -132,7 +132,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
         year: 2018,
         price: "$75,000",
         // CAR IMAGES - Replace with actual car photos
-        image: "/placeholder.svg?height=200&width=300",
+        image: "/car4.jpg?height=200&width=300",
         condition: "Used",
         mileage: "45,000 km",
         featured: false,
@@ -144,7 +144,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
         year: 2020,
         price: "$90,000",
         // CAR IMAGES - Replace with actual car photos
-        image: "/placeholder.svg?height=200&width=300",
+        image: "/car5.jpg?height=200&width=300",
         condition: "Used",
         mileage: "22,000 km",
         featured: false,
@@ -156,7 +156,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
         year: 2019,
         price: "$80,000",
         // CAR IMAGES - Replace with actual car photos
-        image: "/placeholder.svg?height=200&width=300",
+        image: "/car1.jpg?height=200&width=300",
         condition: "Used",
         mileage: "35,000 km",
         featured: false,
@@ -168,7 +168,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
         id: 1,
         name: "Sarah Johnson",
         // CUSTOMER AVATAR - Add actual customer photos if available
-        avatar: "/placeholder.svg?height=40&width=40",
+        avatar: "/avatar.jpg?height=40&width=40",
         rating: 5,
         date: "2024-01-15",
         carPurchased: "Honda Vezel 2019",
@@ -179,7 +179,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
         id: 2,
         name: "Michael Chen",
         // CUSTOMER AVATAR - Add actual customer photos if available
-        avatar: "/placeholder.svg?height=40&width=40",
+        avatar: "/avatar.jpg?height=40&width=40",
         rating: 5,
         date: "2024-01-10",
         carPurchased: "Toyota Prius 2020",
@@ -190,7 +190,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
         id: 3,
         name: "Lisa Rodriguez",
         // CUSTOMER AVATAR - Add actual customer photos if available
-        avatar: "/placeholder.svg?height=40&width=40",
+        avatar: "/avatar.jpg?height=40&width=40",
         rating: 4,
         date: "2024-01-05",
         carPurchased: "Nissan Note 2021",
@@ -248,38 +248,30 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
 
         {/* DEALER STOREFRONT HEADER */}
         <div className="bg-white rounded-lg shadow-sm border overflow-hidden mb-8">
-          {/* BANNER IMAGE - Replace with actual dealer banner */}
-          <div className="h-48 bg-gradient-to-r from-blue-600 to-blue-800 relative">
-            <img
-              src={dealer.bannerImage || "/placeholder.svg"}
-              alt={`${dealer.name} banner`}
-              className="w-full h-full object-cover opacity-20"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-blue-800/80"></div>
-          </div>
+          {/* BANNER IMAGE REMOVED */}
 
-          <div className="p-8">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+          <div className="p-6 sm:p-8">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 lg:space-x-8">
               {/* DEALER LOGO - Replace with high-resolution logo */}
-              <div className="flex-shrink-0 -mt-16 lg:-mt-20">
-                <div className="bg-white p-4 rounded-lg shadow-lg border">
+              <div className="flex-shrink-0 -mt-18 lg:-mt-20">
+                <div className="bg-white p-3 sm:p-4 rounded-lg shadow-lg border">
                   <img
                     src={dealer.logo || "/placeholder.svg"}
                     alt={`${dealer.name} logo`}
-                    className="h-20 w-auto object-contain"
+                    className="h-16 sm:h-20 w-auto object-contain"
                   />
                 </div>
               </div>
 
               {/* DEALER INFO */}
-              <div className="flex-1">
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                  <div>
-                    <div className="flex items-center space-x-3 mb-2">
-                      <h1 className="text-3xl font-bold text-gray-900">{dealer.name}</h1>
+              <div className="flex-1 w-full">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between w-full">
+                  <div className="w-full lg:w-auto">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-3 mb-2">
+                      <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{dealer.name}</h1>
                       {/* VERIFIED BADGE - Customize verification criteria */}
                       {dealer.verified && (
-                        <div className="flex items-center bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                        <div className="flex items-center bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm whitespace-nowrap">
                           <Shield className="w-4 h-4 mr-1" />
                           Verified Dealer
                         </div>
@@ -287,41 +279,41 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
                     </div>
 
                     {/* DEALER STATS */}
-                    <div className="flex flex-wrap items-center gap-6 text-sm text-gray-600 mb-4">
-                      <div className="flex items-center">
+                    <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-gray-600 mb-4">
+                      <div className="flex items-center whitespace-nowrap">
                         <Star className="w-4 h-4 text-yellow-400 fill-current mr-1" />
                         <span className="font-medium">{dealer.rating}</span>
                         <span className="ml-1">({dealer.totalReviews} reviews)</span>
                       </div>
-                      <div className="flex items-center">
+                      <div className="flex items-center whitespace-nowrap">
                         <Car className="w-4 h-4 mr-1" />
                         <span>{dealer.totalCars} cars available</span>
                       </div>
-                      <div className="flex items-center">
+                      <div className="flex items-center whitespace-nowrap">
                         <Calendar className="w-4 h-4 mr-1" />
                         <span>Since {dealer.memberSince}</span>
                       </div>
-                      <div className="flex items-center">
+                      <div className="flex items-center whitespace-nowrap">
                         <Users className="w-4 h-4 mr-1" />
                         <span>{dealer.stats.totalSales}+ cars sold</span>
                       </div>
                     </div>
 
                     {/* DEALER DESCRIPTION */}
-                    <p className="text-gray-600 mb-6 max-w-3xl">{dealer.description}</p>
+                    <p className="text-gray-600 max-w-full sm:max-w-3xl">{dealer.description}</p>
                   </div>
 
                   {/* CONTACT BUTTONS - Update with actual contact information */}
-                  <div className="flex flex-col space-y-3 lg:ml-8">
-                    <Button className="bg-green-600 hover:bg-green-700 text-white min-w-[160px]">
+                  <div className="flex flex-col space-y-3 mt-6 lg:mt-0 lg:ml-8 w-full max-w-xs sm:max-w-none sm:w-auto">
+                    <Button className="bg-green-600 hover:bg-green-700 text-white w-full sm:min-w-[160px]">
                       <MessageCircle className="w-4 h-4 mr-2" />
                       WhatsApp
                     </Button>
-                    <Button variant="outline" className="bg-transparent min-w-[160px]">
+                    <Button variant="outline" className="bg-transparent w-full sm:min-w-[160px]">
                       <Phone className="w-4 h-4 mr-2" />
                       Call Now
                     </Button>
-                    <Button variant="outline" className="bg-transparent min-w-[160px]">
+                    <Button variant="outline" className="bg-transparent w-full sm:min-w-[160px]">
                       <Mail className="w-4 h-4 mr-2" />
                       Email
                     </Button>
@@ -333,7 +325,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
         </div>
 
         {/* DEALER STATS CARDS */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <div className="bg-white rounded-lg shadow-sm border p-4 text-center">
             <div className="text-2xl font-bold text-blue-600">{dealer.stats.yearsInBusiness}+</div>
             <div className="text-sm text-gray-600">Years in Business</div>
@@ -353,61 +345,59 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
         </div>
 
         {/* TABS NAVIGATION */}
-        <div className="bg-white rounded-lg shadow-sm border mb-8">
+        <div className="bg-white rounded-lg shadow-sm border mb-8 overflow-x-auto">
           <div className="border-b">
-            <nav className="flex space-x-8 px-6">
+            <nav className="flex space-x-4 sm:space-x-8 px-4 sm:px-6">
               {[
-                { id: "inventory", label: "Inventory", count: dealer.totalCars },
+                { id: "inventory", label: "Inventory"},
                 { id: "about", label: "About" },
-                { id: "reviews", label: "Reviews", count: dealer.totalReviews },
+                { id: "reviews", label: "Reviews"},
                 { id: "contact", label: "Contact" },
               ].map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`py-4 px-2 border-b-2 font-medium text-sm ${
+                  className={`whitespace-nowrap py-4 px-2 border-b-2 font-medium text-sm ${
                     activeTab === tab.id
                       ? "border-blue-600 text-blue-600"
                       : "border-transparent text-gray-500 hover:text-gray-700"
                   }`}
                 >
                   {tab.label}
-                  {tab.count && (
-                    <span className="ml-2 bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">{tab.count}</span>
-                  )}
+                  
                 </button>
               ))}
             </nav>
           </div>
 
-          <div className="p-6">
+          <div className="p-4 sm:p-6 min-h-[300px]">
             {/* INVENTORY TAB */}
             {activeTab === "inventory" && (
               <div>
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 space-y-4 lg:space-y-0">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
                   <h2 className="text-xl font-semibold text-gray-900">Available Cars</h2>
 
                   {/* INVENTORY FILTERS */}
-                  <div className="flex flex-wrap gap-4">
-                    <div className="relative">
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 w-full sm:w-auto max-w-full">
+                    <div className="relative flex-1 sm:flex-none min-w-[140px]">
                       <select
                         value={filterPrice}
                         onChange={(e) => setFilterPrice(e.target.value)}
-                        className="p-2 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-2 focus:ring-blue-500 pr-8"
+                        className="w-full p-2 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-2 focus:ring-blue-500 pr-8"
                       >
                         <option value="all">All Prices</option>
                         <option value="under-100k">Under $100K</option>
                         <option value="100k-200k">$100K - $200K</option>
                         <option value="over-200k">Over $200K</option>
                       </select>
-                      <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                     </div>
 
-                    <div className="relative">
+                    <div className="relative flex-1 sm:flex-none min-w-[140px]">
                       <select
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value)}
-                        className="p-2 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-2 focus:ring-blue-500 pr-8"
+                        className="w-full p-2 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-2 focus:ring-blue-500 pr-8"
                       >
                         <option value="newest">Newest First</option>
                         <option value="price-low">Price: Low to High</option>
@@ -415,7 +405,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
                         <option value="year">Year: Newest</option>
                         <option value="mileage">Lowest Mileage</option>
                       </select>
-                      <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                     </div>
                   </div>
                 </div>
@@ -423,7 +413,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
                 <div className="text-sm text-gray-600 mb-6">{filteredInventory.length} cars found</div>
 
                 {/* CARS GRID - Car images will be replaced with actual photos */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {filteredInventory.map((car) => (
                     <CarCard key={car.id} car={car} />
                   ))}
@@ -433,7 +423,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
 
             {/* ABOUT TAB */}
             {activeTab === "about" && (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
                   <div className="space-y-3 mb-8">
@@ -497,7 +487,7 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
             {/* REVIEWS TAB */}
             {activeTab === "reviews" && (
               <div>
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 space-y-3 sm:space-y-0">
                   <h2 className="text-xl font-semibold text-gray-900">Customer Reviews</h2>
                   <div className="flex items-center">
                     <Star className="w-5 h-5 text-yellow-400 fill-current" />
@@ -509,15 +499,15 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
                 <div className="space-y-6">
                   {dealer.reviews.map((review) => (
                     <div key={review.id} className="border-b border-gray-200 pb-6 last:border-b-0">
-                      <div className="flex items-start space-x-4">
+                      <div className="flex flex-col sm:flex-row items-start space-x-0 sm:space-x-4">
                         {/* CUSTOMER AVATAR - Replace with actual customer photos if available */}
                         <img
                           src={review.avatar || "/placeholder.svg"}
                           alt={review.name}
-                          className="w-12 h-12 rounded-full object-cover"
+                          className="w-12 h-12 rounded-full object-cover mb-3 sm:mb-0"
                         />
                         <div className="flex-1">
-                          <div className="flex items-center justify-between mb-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
                             <div>
                               <div className="font-medium text-gray-900">{review.name}</div>
                               <div className="text-sm text-gray-500">Purchased: {review.carPurchased}</div>
@@ -532,9 +522,9 @@ export default function DealerProfilePage({ params }: { params: { id: string } }
                                 ))}
                               </div>
                             </div>
-                            <span className="text-sm text-gray-500">{review.date}</span>
+                            <span className="text-sm text-gray-500 mt-1 sm:mt-0">{review.date}</span>
                           </div>
-                          <p className="text-gray-600">{review.comment}</p>
+                          <p className="text-gray-600 whitespace-pre-line">{review.comment}</p>
                         </div>
                       </div>
                     </div>

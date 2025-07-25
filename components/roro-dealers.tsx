@@ -13,7 +13,7 @@ export default function RoRoDealers() {
     {
       id: 1,
       name: "Premium Auto Imports",
-      logo: "/car1.jpg?height=60&width=120",
+      logo: "/dealerlogo.jpg?height=60&width=120",
       verified: true,
       rating: 4.8,
       totalCars: 45,
@@ -42,7 +42,7 @@ export default function RoRoDealers() {
     {
       id: 2,
       name: "Island Auto Gallery",
-      logo: "/placeholder.svg?height=60&width=120",
+      logo: "/dealerlogo.jpg?height=60&width=120",
       verified: true,
       rating: 4.9,
       totalCars: 32,

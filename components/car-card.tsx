@@ -30,7 +30,11 @@ export default function CarCard({ car }: CarCardProps) {
   if (car.featured) {
     return (
       <div className="md:col-span-2 lg:col-span-2 bg-white rounded-lg shadow-sm border overflow-hidden">
-        <div className="flex flex-col md:flex-row gap-6 p-6">
+        <div
+          className={`flex gap-6 p-6 ${
+            car.id === 3 ? "flex-col-reverse md:flex-row" : "flex-col md:flex-row"
+          }`}
+        >
           {/* Left side */}
           <div className="flex flex-col justify-between flex-1">
             <div>

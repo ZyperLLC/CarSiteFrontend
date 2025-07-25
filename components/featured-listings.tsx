@@ -1,9 +1,12 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import CarCard from "@/components/car-card"
 import { Button } from "@/components/ui/button"
 
 export default function FeaturedListings() {
   // Car listings data - Add/edit car information here
-  const featuredCars = [
+  const carsData = [
     {
       id: 1,
       name: "Toyota RAV4",
@@ -46,7 +49,6 @@ export default function FeaturedListings() {
       },
       description: "The smart choice for comfort, safety, and performance",
     },
-    
     {
       id: 4,
       name: "Toyota RAV4",
@@ -81,6 +83,27 @@ export default function FeaturedListings() {
     },
   ]
 
+  const [featuredCars, setFeaturedCars] = useState(carsData)
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        // On mobile view (<md)
+        const id3Car = carsData.find((car) => car.id === 3)
+        const otherCars = carsData.filter((car) => car.id !== 3)
+        setFeaturedCars([id3Car!, ...otherCars])
+      } else {
+        // On desktop view
+        setFeaturedCars(carsData)
+      }
+    }
+
+    handleResize() // Run on mount
+    window.addEventListener("resize", handleResize)
+
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -96,10 +119,14 @@ export default function FeaturedListings() {
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-lg shadow-sm">
-          <div className="mb-4 md:mb-0">
-            <h3 className="text-xl font-semibold text-gray-900">All cars on one platform — simple and reliable</h3>
+          <div className="mb-4 md:mb-0 text-center md:text-left">
+            <h3 className="text-xl font-semibold text-gray-900">
+              All cars on one platform — simple and reliable
+            </h3>
           </div>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2">Explore More Cars</Button>
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2">
+            Explore More Cars
+          </Button>
         </div>
       </div>
     </section>
