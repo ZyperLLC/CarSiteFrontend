@@ -1,53 +1,25 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Header from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { X, Plus, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
 export default function ComparePage() {
-  const [compareList, setCompareList] = useState([
-    {
-      id: 1,
-      name: "Toyota RAV4",
-      location: "San Fernando",
-      year: 2019,
-      price: "$180,000",
-      image: "/car3.jpg",
-      specs: {
-        engine: "2.0L Petrol",
-        transmission: "Automatic",
-        drivetrain: "AWD",
-        mileage: "45,000 km",
-        fuelType: "Petrol",
-        doors: "5",
-        seats: "5",
-        condition: "Used",
-      },
-    },
-    {
-      id: 2,
-      name: "Honda CR-V",
-      location: "Port of Spain",
-      year: 2020,
-      price: "$195,000",
-      image: "/car2.jpg",
-      specs: {
-        engine: "1.5L Turbo",
-        transmission: "CVT",
-        drivetrain: "AWD",
-        mileage: "32,000 km",
-        fuelType: "Petrol",
-        doors: "5",
-        seats: "5",
-        condition: "Used",
-      },
-    },
-  ])
+  const [compareList, setCompareList] = useState<any[]>([])
+
+  useEffect(() => {
+    const stored = localStorage.getItem("compareList")
+    if (stored) {
+      setCompareList(JSON.parse(stored))
+    }
+  }, [])
 
   const removeFromCompare = (id: number) => {
-    setCompareList(compareList.filter((car) => car.id !== id))
+    const updatedList = compareList.filter((car) => car.id !== id)
+    setCompareList(updatedList)
+    localStorage.setItem("compareList", JSON.stringify(updatedList))
   }
 
   const maxCompareItems = 2
@@ -142,7 +114,7 @@ export default function ComparePage() {
                           key={car.id}
                           className="p-4 text-center text-gray-600 min-w-[300px] align-top"
                         >
-                          {car.specs[spec.key as keyof typeof car.specs] || "N/A"}
+                          {car.specs?.[spec.key as keyof typeof car.specs] || "N/A"}
                         </td>
                       ))}
                     </tr>
@@ -154,7 +126,10 @@ export default function ComparePage() {
             {/* Mobile Compare Grid */}
             <div className="md:hidden grid grid-cols-2 gap-4">
               {compareList.map((car) => (
-                <div key={car.id} className="bg-white rounded-lg shadow-sm border p-3 flex flex-col items-center">
+                <div
+                  key={car.id}
+                  className="bg-white rounded-lg shadow-sm border p-3 flex flex-col items-center"
+                >
                   <div className="relative w-full">
                     <button
                       onClick={() => removeFromCompare(car.id)}
@@ -169,17 +144,19 @@ export default function ComparePage() {
                     />
                   </div>
                   <h3 className="text-sm font-semibold text-center text-gray-900">{car.name}</h3>
-                  <p className="text-xs text-gray-600 text-center">{car.location} • {car.year}</p>
+                  <p className="text-xs text-gray-600 text-center">
+                    {car.location} • {car.year}
+                  </p>
                   <p className="text-sm font-bold text-blue-600 mt-1">{car.price}</p>
                   <div className="mt-2 text-xs text-gray-700 w-full">
-                    <p><strong>Engine:</strong> {car.specs.engine}</p>
-                    <p><strong>Transmission:</strong> {car.specs.transmission}</p>
-                    <p><strong>Drivetrain:</strong> {car.specs.drivetrain}</p>
-                    <p><strong>Mileage:</strong> {car.specs.mileage}</p>
-                    <p><strong>Fuel Type:</strong> {car.specs.fuelType}</p>
-                    <p><strong>Doors:</strong> {car.specs.doors}</p>
-                    <p><strong>Seats:</strong> {car.specs.seats}</p>
-                    <p><strong>Condition:</strong> {car.specs.condition}</p>
+                    <p><strong>Engine:</strong> {car.specs?.engine || "N/A"}</p>
+                    <p><strong>Transmission:</strong> {car.specs?.transmission || "N/A"}</p>
+                    <p><strong>Drivetrain:</strong> {car.specs?.drivetrain || "N/A"}</p>
+                    <p><strong>Mileage:</strong> {car.specs?.mileage || "N/A"}</p>
+                    <p><strong>Fuel Type:</strong> {car.specs?.fuelType || "N/A"}</p>
+                    <p><strong>Doors:</strong> {car.specs?.doors || "N/A"}</p>
+                    <p><strong>Seats:</strong> {car.specs?.seats || "N/A"}</p>
+                    <p><strong>Condition:</strong> {car.specs?.condition || "N/A"}</p>
                   </div>
                 </div>
               ))}

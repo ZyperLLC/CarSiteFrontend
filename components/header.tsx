@@ -4,9 +4,18 @@ import { useState } from "react"
 import { Search, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const router = useRouter()
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    router.push(`/browse?query=${encodeURIComponent(searchQuery.trim())}`)
+    setMenuOpen(false)
+  }
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -38,15 +47,20 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Search Button */}
-          <div className="hidden md:block">
-            <Link href="/browse">
-              <Button variant="outline" className="text-blue-600 border-blue-600 hover:bg-blue-50 bg-transparent">
-                <Search className="w-4 h-4 mr-2" />
-                Search Listings
-              </Button>
-            </Link>
-          </div>
+          {/* Search Form for Desktop */}
+          <form onSubmit={handleSearch} className="hidden md:flex items-center space-x-2">
+            <input
+              type="text"
+              placeholder="Search cars..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="border border-blue-600 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <Button variant="outline" type="submit" className="text-blue-600 border-blue-600 hover:bg-blue-50 bg-transparent">
+              <Search className="w-4 h-4 mr-2" />
+              Search Listings
+            </Button>
+          </form>
 
           {/* Mobile Hamburger Icon */}
           <div className="md:hidden">
@@ -76,15 +90,24 @@ export default function Header() {
             <Link href="/help" className="text-gray-700 hover:text-blue-600 font-medium" onClick={() => setMenuOpen(false)}>
               Help
             </Link>
-            <Link href="/browse">
-              <Button variant="outline" className="mt-2 text-blue-600 border-blue-600 w-full">
+
+            {/* Search Form for Mobile */}
+            <form onSubmit={handleSearch} className="flex flex-col space-y-2 mt-2">
+              <input
+                type="text"
+                placeholder="Search cars..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="border border-blue-600 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <Button variant="outline" type="submit" className="text-blue-600 border-blue-600 w-full">
                 <Search className="w-4 h-4 mr-2" />
                 Search Listings
               </Button>
-            </Link>
+            </form>
           </nav>
         </div>
       )}
     </header>
   )
-}//comment
+}

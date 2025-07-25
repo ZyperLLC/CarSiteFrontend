@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Fuel, Gauge, Settings, Scale } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 interface CarCardProps {
   car: {
@@ -16,6 +17,11 @@ interface CarCardProps {
       engine: string
       mileage: string
       drivetrain: string
+      transmission?: string
+      fuelType?: string
+      doors?: number
+      seats?: number
+      condition?: string
     }
     description?: string
     featured?: boolean
@@ -25,6 +31,20 @@ interface CarCardProps {
 export default function CarCard({ car }: CarCardProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [isPriceHovered, setIsPriceHovered] = useState(false)
+  const router = useRouter()
+
+  const handleAddToCompare = () => {
+    const stored = localStorage.getItem("compareList")
+    const compareList = stored ? JSON.parse(stored) : []
+    const alreadyAdded = compareList.find((item: any) => item.id === car.id)
+
+    if (!alreadyAdded && compareList.length < 2) {
+      compareList.push(car) // store full car object with specs
+      localStorage.setItem("compareList", JSON.stringify(compareList))
+    }
+
+    router.push("/compare")
+  }
 
   // Featured card layout
   if (car.featured) {
@@ -77,10 +97,10 @@ export default function CarCard({ car }: CarCardProps) {
                 }`}
               >
                 {isPriceHovered ? (
-                  <Link href="/compare" className="flex items-center gap-2">
+                  <button onClick={handleAddToCompare} className="flex items-center gap-2">
                     <Scale className="w-5 h-5" />
                     <span className="font-bold">Add to Compare</span>
-                  </Link>
+                  </button>
                 ) : (
                   <span className="font-bold text-lg">{car.price}</span>
                 )}
@@ -147,10 +167,10 @@ export default function CarCard({ car }: CarCardProps) {
               }`}
             >
               {isPriceHovered ? (
-                <Link href="/compare" className="flex items-center gap-2">
+                <button onClick={handleAddToCompare} className="flex items-center gap-2">
                   <Scale className="w-5 h-5" />
                   <span className="font-bold">Add to Compare</span>
-                </Link>
+                </button>
               ) : (
                 <span className="font-bold">{car.price}</span>
               )}

@@ -302,13 +302,7 @@ export default function SellCarPage() {
               {/* Upload Button */}
               <div className="text-center">
                 <label className="inline-block">
-                  <Button
-                    className="bg-blue-600 hover:bg-blue-700 text-white"
-                    disabled={uploadedImages.length >= maxImages}
-                  >
-                    <Upload className="w-4 h-4 mr-2" />
-                    Choose Photos ({uploadedImages.length}/{maxImages})
-                  </Button>
+           
                   <input
                     type="file"
                     accept="image/*"
