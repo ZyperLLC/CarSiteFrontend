@@ -5,7 +5,7 @@ import { useState } from "react"
 export default function FilterTabs() {
   const filters = [
     "SUVs under $200k",
-    "Used Sedans with Hybrid",
+    "Hybrid",
     "Electric Cars",
     "Sports Cars",
     "Family Vans",
