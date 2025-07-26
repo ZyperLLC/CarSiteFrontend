@@ -23,9 +23,11 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="bg-blue-600 text-white px-3 py-2 rounded-lg font-bold text-lg">
-              TTRidz
-            </div>
+            <img
+              src="/logo.jpg"
+              alt="Website Logo"
+              className="h-14 w-auto"
+            />
           </Link>
 
           {/* Desktop Menu */}
