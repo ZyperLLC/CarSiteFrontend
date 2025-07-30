@@ -87,9 +87,34 @@ export default function BrowsePageClient() {
 
   const [filteredCars, setFilteredCars] = useState(allCars);
 
+  // Read filters from query params
+  useEffect(() => {
+    const make = searchParams.get("make") || "";
+    const model = searchParams.get("model") || "";
+    const price = searchParams.get("price") || "";
+    const region = searchParams.get("region") || "";
+
+    setFilters((prev) => ({
+      ...prev,
+      make,
+      model,
+      price: mapPriceQuery(price),
+      region,
+    }));
+  }, [searchParams]);
+
+  // Reapply filters when filters change
   useEffect(() => {
     applyFilters();
-  }, [searchQuery]);
+  }, [filters, searchQuery]);
+
+  const mapPriceQuery = (priceValue: string) => {
+    if (!priceValue) return "";
+    const numericPrice = parseInt(priceValue, 10);
+    if (numericPrice < 100000) return "Under $100K";
+    if (numericPrice >= 100000 && numericPrice <= 200000) return "$100K - $200K";
+    return "Over $200K";
+  };
 
   const handleFilterChange = (field: string, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));

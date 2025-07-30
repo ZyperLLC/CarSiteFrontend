@@ -23,9 +23,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <div className="bg-blue-600 text-white px-3 py-2 rounded-lg font-bold text-lg">
-              TTRidz
-            </div>
+            <img src="/logo.jpg" alt="Website Logo" className="h-12 w-auto" />
           </Link>
 
           {/* Desktop Menu */}
@@ -36,7 +34,7 @@ export default function Header() {
             <Link href="/dealers" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
               Dealers
             </Link>
-            <Link href="/sell" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
+            <Link href="/select" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
               Sell Your Car
             </Link>
             <Link href="/about" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
@@ -62,7 +60,7 @@ export default function Header() {
             </Button>
           </form>
 
-          {/* Mobile Hamburger Icon */}
+          {/* Mobile Hamburger */}
           <div className="md:hidden">
             <Button variant="ghost" size="icon" onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -81,7 +79,7 @@ export default function Header() {
             <Link href="/dealers" className="text-gray-700 hover:text-blue-600 font-medium" onClick={() => setMenuOpen(false)}>
               Dealers
             </Link>
-            <Link href="/sell" className="text-gray-700 hover:text-blue-600 font-medium" onClick={() => setMenuOpen(false)}>
+            <Link href="/select" className="text-gray-700 hover:text-blue-600 font-medium" onClick={() => setMenuOpen(false)}>
               Sell Your Car
             </Link>
             <Link href="/about" className="text-gray-700 hover:text-blue-600 font-medium" onClick={() => setMenuOpen(false)}>
