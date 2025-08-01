@@ -11,6 +11,9 @@ export default authMiddleware({
     "/select",
     "/sign-in",         // ✅ MUST ADD this
     "/sign-up",         // ✅ Recommended to add as well
+    "/compare",
+    "/car(.*)",
+    "/dealers(.*)",
   ],
 });
 
