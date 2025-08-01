@@ -20,7 +20,7 @@ export default function PricingPage() {
       price: "$49/mo",
       features: ["Up to 20 listings", "Dealer badge", "Basic dashboard"],
       button: "Get Started",
-      onClick: () => alert("Upgrade to Pro Dealer coming soon!"),
+      onClick: () => router.push("/payment?plan=prodealer"),
     },
     {
       title: "Elite Dealer",
@@ -28,11 +28,10 @@ export default function PricingPage() {
       features: [
         "Unlimited listings",
         "Dashboard analytics",
-        "Featured placement",
-        "API feed",
+        "Priority support",
       ],
       button: "Contact Sales",
-      onClick: () => alert("Please contact sales@yourdomain.com"),
+      onClick: () => router.push("/payment?plan=elitedealer"),
     },
   ];
 
@@ -41,7 +40,7 @@ export default function PricingPage() {
       <Header />
       <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6">
         <h1 className="text-3xl md:text-5xl font-bold text-center mb-4">
-          Get started now, pick a plan later
+          Get started now, pick a plan
         </h1>
         <p className="text-center text-gray-600 max-w-xl mb-10">
           Choose the plan that suits your dealership and start listing cars in
