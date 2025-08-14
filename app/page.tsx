@@ -9,7 +9,7 @@ import Footer from "@/components/footer"
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen overflow-hidden">
       {/* MAIN HEADER NAVIGATION - Contains logo, menu, and search button */}
       <Header />
 

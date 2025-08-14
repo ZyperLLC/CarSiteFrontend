@@ -19,12 +19,12 @@ export default function HeroSection() {
             transition={{ duration: 1, ease: "easeOut" }}
           >
             {/* Main Heading */}
-            <h1 className="whitespace-nowrap text-5xl mb-4 text-center lg:text-left text-[#0A131F] font-inter not-italic font-extrabold leading-[70px] tracking-[-2.56px]">
+            <h1 className="md:whitespace-nowrap text-5xl mb-4 text-center lg:text-left text-[#0A131F] font-inter not-italic font-extrabold leading-[70px] tracking-[-2.56px]">
               Buy & Sell cars on TTRidz
             </h1>
 
             {/* Subtitle */}
-            <p className="whitespace-nowrap mb-8 text-center lg:text-left text-[#0A131F] font-inter text-2xl not-italic font-semibold leading-[28px] tracking-[-0.48px]">
+            <p className="md:whitespace-nowrap mb-8 text-center lg:text-left text-[#0A131F] font-inter text-2xl not-italic font-semibold leading-[28px] tracking-[-0.48px]">
               Browse through hundreds of used and new cars for sale
             </p>
 

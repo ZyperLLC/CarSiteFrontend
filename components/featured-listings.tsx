@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
 import CarCard from "@/components/car-card"
 import { Button } from "@/components/ui/button"
 
 export default function FeaturedListings() {
-  // Car listings data - Add/edit car information here
   const carsData = [
     {
       id: 1,
@@ -35,11 +35,11 @@ export default function FeaturedListings() {
       location: "San Fernando",
       year: 2019,
       price: "$180,000",
-      image: "/car1.jpg", // Use full-size image
+      image: "/car1.jpg",
       imageStyle: {
         width: "100%",
-        height: "200px", // Adjust height as needed
-        objectFit: "contain" // Ensures full image fits inside the box
+        height: "200px",
+        objectFit: "contain",
       },
       featured: true,
       specs: {
@@ -88,37 +88,55 @@ export default function FeaturedListings() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        // On mobile view (<md)
         const id3Car = carsData.find((car) => car.id === 3)
         const otherCars = carsData.filter((car) => car.id !== 3)
         setFeaturedCars([id3Car!, ...otherCars])
       } else {
-        // On desktop view
         setFeaturedCars(carsData)
       }
     }
 
-    handleResize() // Run on mount
+    handleResize()
     window.addEventListener("resize", handleResize)
-
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  const MotionCard = ({ car, index }: { car: any; index: number }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: "easeOut",
+      }}
+    >
+      <CarCard car={car} />
+    </motion.div>
+  )
+
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header - Edit title here */}
         <h2 className="text-3xl font-bold text-gray-900 mb-12">Featured Listings</h2>
 
-        {/* Car Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {featuredCars.map((car) => (
-            <CarCard key={car.id} car={car} />
+        {/* First row - 3 cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {featuredCars.slice(0, 3).map((car, index) => (
+            <MotionCard key={car.id} car={car} index={index} />
+          ))}
+        </div>
+
+        {/* Second row - 4 cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          {featuredCars.slice(3, 7).map((car, index) => (
+            <MotionCard key={car.id} car={car} index={index} />
           ))}
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-lg shadow-sm">
+        <div className="flex flex-col md:flex-row justify-between items-center bg-gray-50 p-6 rounded-lg shadow-sm">
           <div className="mb-4 md:mb-0 text-center md:text-left">
             <h3 className="text-xl font-semibold text-gray-900">
               All cars on one platform — simple and reliable

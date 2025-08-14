@@ -4,6 +4,8 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Shield, Star, Scale } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
+import { motion } from "framer-motion"
 
 export default function RoRoDealers() {
   const [hoveredIndex, setHoveredIndex] = useState<string | null>(null)
@@ -82,12 +84,14 @@ export default function RoRoDealers() {
 
         <div className="space-y-12">
           {dealers.map((dealer) => (
-            <div key={dealer.id} className="bg-gray-50 rounded-lg p-8">
+            <div key={dealer.id} className="bg-white rounded-lg p-8">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                 <div className="flex items-center space-x-4 mb-4 md:mb-0">
-                  <img
+                  <Image
                     src={dealer.logo || "/placeholder.svg"}
                     alt={`${dealer.name} logo`}
+                    width={120}
+                    height={60}
                     className="h-12 w-auto object-contain"
                   />
                   <div>
@@ -123,7 +127,7 @@ export default function RoRoDealers() {
                   const isPriceHovered = priceHoveredIndex === key
 
                   return (
-                    <div
+                    <motion.div
                       key={key}
                       className="bg-white rounded-lg shadow-sm border overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-md relative"
                       onMouseEnter={() => setHoveredIndex(key)}
@@ -131,12 +135,18 @@ export default function RoRoDealers() {
                         setHoveredIndex(null)
                         setPriceHoveredIndex(null)
                       }}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.15 }}
+                      viewport={{ once: true }}
                     >
                       <Link href={`/car/${key}`}>
                         <div className="relative w-full min-h-[150px] bg-white flex items-center justify-center overflow-hidden">
-                          <img
+                          <Image
                             src={car.image || "/placeholder.svg"}
                             alt={car.name}
+                            width={300}
+                            height={200}
                             className="w-full h-auto object-contain transition-transform duration-300 hover:scale-105"
                           />
                         </div>
@@ -177,7 +187,7 @@ export default function RoRoDealers() {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   )
                 })}
               </div>

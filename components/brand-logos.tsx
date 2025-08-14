@@ -17,7 +17,7 @@ const images = [
 
 export const BrandLogos = () => {
   return (
-    <div className="w-full relative overflow-hidden mt-9">
+    <div className="w-full relative overflow-hidden mt-9 py-12 bg-white">
       <motion.div
         className="flex gap-16 pr-16"
         transition={{
@@ -29,23 +29,23 @@ export const BrandLogos = () => {
         animate={{ transform: "translateX(-50%)" }}
       >
         {images.map(({ src, alt }, index) => (
-          <Image
-            key={index}
+           <Image
+             key={index}
             src={src}
             alt={alt}
-            width={120}
-            height={60}
-            className="flex-none w-auto h-8 object-contain"
-          />
+           width={90}
+          height={90}
+       className="flex-none w-[90px] h-[90px] object-contain"
+  />
         ))}
         {images.map(({ src, alt }, index) => (
           <Image
             key={`dup-${index}`}
             src={src}
             alt={alt}
-            width={120}
-            height={60}
-            className="flex-none w-auto h-8 object-contain"
+            width={90}
+            height={90}
+            className="flex-none w-[90px] h-[90px] object-contain"
           />
         ))}
       </motion.div>
