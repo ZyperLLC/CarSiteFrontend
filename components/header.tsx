@@ -24,14 +24,14 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <img
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Website Logo"
               className="h-14 w-auto"
             />
           </Link>
 
           {/* Desktop Menu */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 text-[#424242] font-inter text-[18px] not-italic font-semibold leading-normal">
             <Link href="/browse" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">
               Browse Cars
             </Link>
@@ -51,16 +51,18 @@ export default function Header() {
 
           {/* Search Form for Desktop */}
           <form onSubmit={handleSearch} className="hidden md:flex items-center space-x-2">
-            <input
+            {/* <input
               type="text"
               placeholder="Search cars..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="border border-blue-600 rounded-md px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <Button variant="outline" type="submit" className="text-blue-600 border-blue-600 hover:bg-blue-50 bg-transparent">
-              <Search className="w-4 h-4 mr-2" />
+            /> */}
+            <Button variant="outline"  className="  text-blue-600 border-blue-600 hover:bg-blue-50 bg-transparent transition-all duration-300 hover:translate-y-1">
+              {/* <Search className="w-4 h-4 mr-2" /> */}
+              <h2 className="text-[#2058E6] font-inter text-[18px] not-italic font-semibold leading-normal">
               Search Listings
+              </h2>
             </Button>
           </form>
 
