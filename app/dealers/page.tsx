@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Header from "@/components/header"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Shield, Star, MapPin, Phone, MessageCircle, Car, ChevronDown } from "lucide-react"
 import Link from "next/link"
@@ -99,19 +99,30 @@ export default function DealersPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center mb-12">
+
+        {/* Header */}
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Certified RoRo Dealers</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Browse our network of verified dealers specializing in quality imported vehicles with full warranties and
-            inspection reports.
+            Browse our network of verified dealers specializing in quality imported vehicles with full warranties and inspection reports.
           </p>
-        </div>
+        </motion.div>
 
         {/* FILTERS */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
+        <motion.div
+          className="bg-white rounded-lg shadow-sm border p-6 mb-8"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
             <div className="flex flex-wrap gap-4 w-full md:w-auto">
               <div className="relative w-full md:w-auto">
@@ -154,14 +165,18 @@ export default function DealersPage() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* DEALERS GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {filteredDealers.map((dealer) => (
-            <div
+            <motion.div
               key={dealer.id}
               className="bg-white rounded-lg shadow-sm border overflow-hidden hover:shadow-md transition-shadow"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: dealer.id * 0.15 }}
             >
               <div className="p-6 border-b">
                 <div className="flex items-start justify-between mb-4">
@@ -221,9 +236,29 @@ export default function DealersPage() {
 
               <div className="p-6">
                 <h4 className="font-semibold text-gray-900 mb-4">Featured Cars</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <motion.div
+                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  variants={{
+                    hidden: { opacity: 0 },
+                    show: {
+                      opacity: 1,
+                      transition: { staggerChildren: 0.15 }
+                    }
+                  }}
+                >
                   {dealer.featuredCars.map((car, index) => (
-                    <div key={index} className="group cursor-pointer">
+                    <motion.div
+                      key={index}
+                      variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        show: { opacity: 1, y: 0 }
+                      }}
+                      transition={{ duration: 0.4 }}
+                      className="group cursor-pointer"
+                    >
                       <div className="w-full aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
                         <img
                           src={car.image || "/placeholder.svg"}
@@ -235,21 +270,30 @@ export default function DealersPage() {
                         <p className="text-sm font-medium text-gray-900 truncate">{car.name}</p>
                         <p className="text-sm text-blue-600 font-semibold">{car.price}</p>
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        <div className="text-center mt-12 bg-blue-50 rounded-lg p-8">
+        {/* Become Dealer CTA */}
+        <motion.div
+          className="text-center mt-12 bg-blue-50 rounded-lg p-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Want to become a certified dealer?</h2>
           <p className="text-gray-600 mb-6">
             Join our network of trusted dealers and reach thousands of potential customers.
           </p>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white">Apply to Become a Dealer</Button>
-        </div>
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 hover:translate-y-1">
+            Apply to Become a Dealer
+          </Button>
+        </motion.div>
       </div>
     </div>
   )

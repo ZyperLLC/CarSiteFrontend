@@ -1,23 +1,34 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
 
 export default function BottomCTA() {
   return (
-    <section className="bg-blue-600 py-16">
+    <motion.section
+      className="bg-blue-600 py-16"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Main Heading - Edit CTA title here */}
+        {/* Main Heading */}
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
           Selling your car has never been easier
           <br />— reach real buyers in minutes
         </h2>
 
-        {/* Subtitle - Edit CTA description here */}
+        {/* Subtitle */}
         <p className="text-xl text-blue-100 mb-8">
           List your car for free and get instant exposure to thousands of buyers
         </p>
 
-        {/* CTA Button - Customize button text here */}
-        <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg font-medium">Post Your Ad</Button>
+        {/* CTA Button */}
+        <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg font-medium transition-all duration-300 hover:translate-y-1">
+          Post Your Ad
+        </Button>
       </div>
-    </section>
+    </motion.section>
   )
 }

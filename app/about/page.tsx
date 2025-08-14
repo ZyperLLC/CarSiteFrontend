@@ -1,102 +1,113 @@
-import Header from "@/components/header"
+"use client"
+
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Car, Shield, Users, Zap } from "lucide-react"
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2, // delay between each child animation
+    },
+  },
+}
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+}
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
         {/* Hero Section */}
-        <div className="text-center mb-16">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">About TTRidz</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Trinidad & Tobago's most trusted platform for buying and selling cars. We make car trading simple, safe, and
             reliable for everyone.
           </p>
-        </div>
+        </motion.div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-white p-8 rounded-lg shadow-sm border">
-            <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-              <Car className="w-6 h-6 text-blue-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Thousands of Cars</h3>
-            <p className="text-gray-600">
-              Browse through hundreds of verified listings from trusted sellers across Trinidad & Tobago.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-lg shadow-sm border">
-            <div className="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-              <Shield className="w-6 h-6 text-green-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Safe & Secure</h3>
-            <p className="text-gray-600">
-              All listings are verified and we provide safety tips to ensure secure transactions.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-lg shadow-sm border">
-            <div className="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-              <Users className="w-6 h-6 text-purple-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Trusted Community</h3>
-            <p className="text-gray-600">
-              Join thousands of satisfied buyers and sellers who trust TTRidz for their car needs.
-            </p>
-          </div>
-
-          <div className="bg-white p-8 rounded-lg shadow-sm border">
-            <div className="bg-orange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-              <Zap className="w-6 h-6 text-orange-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">Quick & Easy</h3>
-            <p className="text-gray-600">
-              List your car in minutes or find your dream car with our powerful search filters.
-            </p>
-          </div>
-        </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16"
+        >
+          {[
+            { icon: <Car className="w-6 h-6 text-blue-600" />, bg: "bg-blue-100", title: "Thousands of Cars", desc: "Browse through hundreds of verified listings from trusted sellers across Trinidad & Tobago." },
+            { icon: <Shield className="w-6 h-6 text-green-600" />, bg: "bg-green-100", title: "Safe & Secure", desc: "All listings are verified and we provide safety tips to ensure secure transactions." },
+            { icon: <Users className="w-6 h-6 text-purple-600" />, bg: "bg-purple-100", title: "Trusted Community", desc: "Join thousands of satisfied buyers and sellers who trust TTRidz for their car needs." },
+            { icon: <Zap className="w-6 h-6 text-orange-600" />, bg: "bg-orange-100", title: "Quick & Easy", desc: "List your car in minutes or find your dream car with our powerful search filters." },
+          ].map((f, i) => (
+            <motion.div
+              key={i}
+              variants={fadeUp}
+              className="bg-white p-8 rounded-lg shadow-sm border"
+            >
+              <div className={`${f.bg} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
+                {f.icon}
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{f.title}</h3>
+              <p className="text-gray-600">{f.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* How It Works Section */}
-        <div className="bg-white p-8 rounded-lg shadow-sm border mb-16">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="bg-white p-8 rounded-lg shadow-sm border mb-16"
+        >
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">How TTRidz Works</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                1
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Browse or List</h3>
-              <p className="text-gray-600">Search through thousands of cars or list your own vehicle for free</p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                2
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Connect</h3>
-              <p className="text-gray-600">
-                Contact sellers directly through WhatsApp or phone for quick communication
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                3
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Deal Safely</h3>
-              <p className="text-gray-600">
-                Meet in person, inspect the vehicle, and complete your transaction securely
-              </p>
-            </div>
+            {[
+              { step: "1", title: "Browse or List", desc: "Search through thousands of cars or list your own vehicle for free" },
+              { step: "2", title: "Connect", desc: "Contact sellers directly through WhatsApp or phone for quick communication" },
+              { step: "3", title: "Deal Safely", desc: "Meet in person, inspect the vehicle, and complete your transaction securely" },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
+                  {item.step}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Contact Section */}
-        <div className="text-center">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="text-center"
+        >
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Need Help?</h2>
           <p className="text-gray-600 mb-6">
             Our support team is here to help you with any questions about buying or selling cars on TTRidz.
@@ -105,7 +116,7 @@ export default function AboutPage() {
             <Button className="bg-green-600 hover:bg-green-700 text-white">WhatsApp Support</Button>
             <Button variant="outline">Email Support</Button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )

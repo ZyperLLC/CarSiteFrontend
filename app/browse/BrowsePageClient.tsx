@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Header from "@/components/header";
 import CarCard from "@/components/car-card";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function BrowsePageClient() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -87,7 +87,6 @@ export default function BrowsePageClient() {
 
   const [filteredCars, setFilteredCars] = useState(allCars);
 
-  // Read filters from query params
   useEffect(() => {
     const make = searchParams.get("make") || "";
     const model = searchParams.get("model") || "";
@@ -103,7 +102,6 @@ export default function BrowsePageClient() {
     }));
   }, [searchParams]);
 
-  // Reapply filters when filters change
   useEffect(() => {
     applyFilters();
   }, [filters, searchQuery]);
@@ -123,7 +121,6 @@ export default function BrowsePageClient() {
   const applyFilters = () => {
     const cars = allCars.filter((car) => {
       const numericPrice = parseInt(car.price.replace(/[^0-9]/g, ""));
-
       const matchesSearch = searchQuery
         ? car.name.toLowerCase().includes(searchQuery)
         : true;
@@ -167,8 +164,6 @@ export default function BrowsePageClient() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Browse All Cars</h1>
@@ -208,8 +203,16 @@ export default function BrowsePageClient() {
                 : "space-y-4"
             }
           >
-            {filteredCars.map((car) => (
-              <CarCard key={car.id} car={car} />
+            {filteredCars.map((car, i) => (
+              <motion.div
+                key={car.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+              >
+                <CarCard car={car} />
+              </motion.div>
             ))}
           </div>
         ) : (
