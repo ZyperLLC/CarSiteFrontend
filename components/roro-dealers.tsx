@@ -114,7 +114,7 @@ export default function RoRoDealers() {
                   </div>
                 </div>
                 <Link href={`/dealers/${dealer.id}`}>
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white">View Dealer Inventory</Button>
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300 hover:translate-y-1">View Dealer Inventory</Button>
                 </Link>
               </div>
 
@@ -197,7 +197,7 @@ export default function RoRoDealers() {
 
         <div className="text-center mt-12">
           <Link href="/dealers">
-            <Button variant="outline" className="px-8 py-3 bg-transparent">
+            <Button variant="outline" className="px-8 py-3 bg-transparent transition-all duration-300 hover:translate-y-1">
               View All Certified Dealers
             </Button>
           </Link>

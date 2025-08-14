@@ -142,7 +142,7 @@ export default function FeaturedListings() {
               All cars on one platform — simple and reliable
             </h3>
           </div>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2">
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 transition-all duration-300 hover:translate-y-1">
             Explore More Cars
           </Button>
         </div>
