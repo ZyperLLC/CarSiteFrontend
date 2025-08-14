@@ -1,35 +1,54 @@
-export default function BrandLogos() {
-  // Add/remove brand logos here - Replace with actual logo images
-  const brands = [
-    { name: "Audi", logo: "/audilogo.jpg?height=60&width=120" },
-    { name: "Ford", logo: "/fordlogo.jpg?height=60&width=120" },
-    { name: "Hyundai", logo: "/hyundailogo.jpg?height=60&width=120" },
-    { name: "Honda", logo: "/hondalogo.jpg?height=60&width=120" },
-    { name: "Infiniti", logo: "/infinitilogo.jpg?height=60&width=120" },
-    { name: "KIA", logo: "/kialogo.jpg?height=60&width=120" },
-    { name: "BMW", logo: "/bmwlogo.jpg?height=60&width=120" },
-    { name: "Nissan", logo: "/nissanlogo.jpg?height=60&width=120" },
-    { name: "Volvo", logo: "/volvologo.jpg?height=60&width=120" },
-  ];
+"use client";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import React from "react";
 
+const images = [
+  { src: "/audilogo.jpg?height=60&width=120", alt: "Audi Logo" },
+  { src: "/fordlogo.jpg?height=60&width=120", alt: "Ford Logo" },
+  { src: "/hyundailogo.jpg?height=60&width=120", alt: "Hyundai Logo" },
+  { src: "/hondalogo.jpg?height=60&width=120", alt: "Honda Logo" },
+  { src: "/infinitilogo.jpg?height=60&width=120", alt: "Infiniti Logo" },
+  { src: "/kialogo.jpg?height=60&width=120", alt: "KIA Logo" },
+  { src: "/bmwlogo.jpg?height=60&width=120", alt: "BMW Logo" },
+  { src: "/nissanlogo.jpg?height=60&width=120", alt: "Nissan Logo" },
+  { src: "/volvologo.jpg?height=60&width=120", alt: "Volvo Logo" },
+];
+
+export const BrandLogos = () => {
   return (
-    <section className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
-          {brands.map((brand) => (
-            <div
-              key={brand.name}
-              className="flex items-center justify-center"
-            >
-              <img
-                src={brand.logo || "/placeholder.svg"}
-                alt={`${brand.name} logo`}
-                className="h-12 md:h-13 w-auto object-contain"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div className="w-full relative overflow-hidden mt-9">
+      <motion.div
+        className="flex gap-16 pr-16"
+        transition={{
+          duration: 10,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+        initial={{ transform: "translateX(0%)" }}
+        animate={{ transform: "translateX(-50%)" }}
+      >
+        {images.map(({ src, alt }, index) => (
+          <Image
+            key={index}
+            src={src}
+            alt={alt}
+            width={120}
+            height={60}
+            className="flex-none w-auto h-8 object-contain"
+          />
+        ))}
+        {images.map(({ src, alt }, index) => (
+          <Image
+            key={`dup-${index}`}
+            src={src}
+            alt={alt}
+            width={120}
+            height={60}
+            className="flex-none w-auto h-8 object-contain"
+          />
+        ))}
+      </motion.div>
+    </div>
   );
-}
+};

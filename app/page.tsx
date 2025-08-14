@@ -1,7 +1,7 @@
 "use client"
 import Header from "@/components/header"
 import HeroSection from "@/components/hero-section"
-import BrandLogos from "@/components/brand-logos"
+import {BrandLogos} from "@/components/brand-logos"
 import FeaturedListings from "@/components/featured-listings"
 import RoRoDealers from "@/components/roro-dealers"
 import BottomCTA from "@/components/bottom-cta"
