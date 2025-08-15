@@ -24,7 +24,7 @@ export const BrandLogos = () => {
       <motion.div
         className="flex gap-16 pr-16"
         transition={{
-          duration: 20, // slower to show all logos before loop
+          duration: 10, // slower to show all logos before loop
           ease: "linear",
           repeat: Infinity,
         }}
