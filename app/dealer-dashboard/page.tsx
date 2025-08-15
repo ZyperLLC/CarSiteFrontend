@@ -9,10 +9,10 @@ import {
   Menu,
   X as XIcon,
 } from "lucide-react";
-import DealerDashboardPage from "@/app/elite-dealer-dashboard/page"; // adjust path as needed
+import DealerDashboardPage from "@/app/elite-dealer-dashboard/page";
 import PricingPage from "@/app/premium/page";
-import CarListing from "@/components/carlistingdashboard"; // adjust path as needed
-import DealerAnalytics from "@/components/DealerAnalytics"; // adjust path as needed
+import CarListing from "@/components/carlistingdashboard";
+import DealerAnalytics from "@/components/DealerAnalytics";
 
 
 type Car = {
@@ -74,7 +74,7 @@ export default function DealerDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-  
+
       {/* Mobile menu toggle */}
       <div className="md:hidden flex justify-between items-center px-4 py-2 bg-white shadow">
         <button
@@ -83,7 +83,7 @@ export default function DealerDashboard() {
           aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
         >
           {isSidebarOpen ? <XIcon className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          <span className="font-medium">{isSidebarOpen ? "Close" : "Menu"}</span>
+          {/* <span className="font-medium">{isSidebarOpen ? "Close" : "Menu"}</span> */}
         </button>
       </div>
       <main className="flex min-h-[calc(100vh-4rem)]">
