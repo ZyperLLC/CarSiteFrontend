@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 
 import type { Metadata } from "next";
 import { usePathname } from "next/navigation";
@@ -70,8 +70,9 @@ export default function RootLayout({
   const pathname = usePathname();
 
   // Only hide the header on /select
-  const shouldHideHeader = pathname === "/select";
+  const hideHeaderOn = ["/select", "/dealer-dashboard"];
 
+  const shouldHideHeader = hideHeaderOn.includes(pathname);
   return (
     <ClerkProvider>
       <html lang="en">
