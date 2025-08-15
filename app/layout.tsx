@@ -1,8 +1,11 @@
-import type { Metadata } from 'next';
+"use client"; 
+
+import type { Metadata } from "next";
+import { usePathname } from "next/navigation";
 import { Sora, Space_Grotesk } from "next/font/google";
-import Header from "@/components/header"
-import Footer from '@/components/footer';
-import BottomCTA from "@/components/bottom-cta"
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import BottomCTA from "@/components/bottom-cta";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -16,6 +19,7 @@ const spaceGroteskFont = Space_Grotesk({
   variable: "--font-space-grotesk",
   weight: "variable",
 });
+
 export const metadata: Metadata = {
   title: {
     template: "TTRidz",
@@ -60,29 +64,31 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const pathname = usePathname();
 
-  console.log("Children:", children);
+  // Only hide the header on /select
+  const shouldHideHeader = pathname === "/select";
 
   return (
     <ClerkProvider>
-    <html lang="en">
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="robots" content="index, follow" />
-      </head>
-      <body
-        className={`${soraFont.variable} ${spaceGroteskFont.variable} antialiased  `}
-      >
-        <Header />
-        {children}
-        <BottomCTA />
-         <Footer/>
-      </body>
-    </html>
+      <html lang="en">
+        <head>
+          <meta charSet="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta name="robots" content="index, follow" />
+        </head>
+        <body
+          className={`${soraFont.variable} ${spaceGroteskFont.variable} antialiased`}
+        >
+          {!shouldHideHeader && <Header />}
+          {children}
+          <BottomCTA />
+          <Footer />
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
