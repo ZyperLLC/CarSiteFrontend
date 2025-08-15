@@ -2,8 +2,15 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
 
 export default function BottomCTA() {
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push("/select")
+  }
+
   return (
     <motion.section
       className="bg-blue-600 py-16"
@@ -24,8 +31,11 @@ export default function BottomCTA() {
           List your car for free and get instant exposure to thousands of buyers
         </p>
 
-        {/* CTA Button */}
-        <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg font-medium transition-all duration-300 hover:translate-y-1">
+        {/* CTA Button - Customize button text here */}
+        <Button
+          onClick={handleClick}
+          className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg font-medium"
+        >
           Post Your Ad
         </Button>
       </div>

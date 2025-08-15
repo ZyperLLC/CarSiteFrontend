@@ -61,6 +61,7 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
 
   console.log("Children:", children);

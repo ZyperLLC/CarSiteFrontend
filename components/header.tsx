@@ -63,7 +63,7 @@ export default function Header() {
             </Button>
           </form>
 
-          {/* Mobile Hamburger Icon */}
+          {/* Mobile Hamburger */}
           <div className="md:hidden">
             <Button
               variant="ghost"
