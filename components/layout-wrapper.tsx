@@ -8,25 +8,21 @@ import BottomCTA from "@/components/bottom-cta";
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  // Hide header on /select, auth pages, and any dashboard page
+  // Hide header on /select
   const shouldHideHeader =
-    pathname.startsWith("/select") ||
-    pathname.startsWith("/sign-in") ||
-    pathname.startsWith("/sign-up") ||
-    pathname.includes("dashboard");
+    pathname.startsWith("/select")
 
-  // Optional: Hide BottomCTA and Footer on dashboards and auth pages
-  const shouldHideFooterAndCTA =
-    pathname.startsWith("/sign-in") ||
-    pathname.startsWith("/sign-up") ||
-    pathname.includes("dashboard");
+
+   // Pages where header, footer, and CTA should be hidden
+  const hideAllLayoutParts =
+    pathname === "/auth/individual" || pathname === "/auth/dealer";
 
   return (
     <>
-      {!shouldHideHeader && <Header />}
+      {!shouldHideHeader && !hideAllLayoutParts && <Header />}
       {children}
-      <BottomCTA />
-      <Footer />
+      {!hideAllLayoutParts && <BottomCTA />}
+      {!hideAllLayoutParts && <Footer />}
     </>
   );
 }
