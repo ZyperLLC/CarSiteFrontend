@@ -4,6 +4,7 @@ import Header from "@/components/header"
 import Footer from '@/components/footer';
 import BottomCTA from "@/components/bottom-cta"
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const soraFont = Sora({
   subsets: ["latin"],
@@ -61,12 +62,12 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-  children: React.ReactNode;
 }>) {
 
   console.log("Children:", children);
 
   return (
+    <ClerkProvider>
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
@@ -82,5 +83,6 @@ export default function RootLayout({
          <Footer/>
       </body>
     </html>
+    </ClerkProvider>
   );
 }

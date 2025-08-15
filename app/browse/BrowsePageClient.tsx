@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import CarCard from "@/components/car-card";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; 
 
 export default function BrowsePageClient() {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
