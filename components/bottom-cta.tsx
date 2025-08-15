@@ -34,7 +34,7 @@ export default function BottomCTA() {
         {/* CTA Button - Customize button text here */}
         <Button
           onClick={handleClick}
-          className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg font-medium"
+          className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg font-medium transition-all duration-300 hover:translate-y-1"
         >
           Post Your Ad
         </Button>

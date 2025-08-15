@@ -16,31 +16,24 @@ const images = [
 ];
 
 export const BrandLogos = () => {
+  // Double the list so scrolling is seamless
+  const scrollingImages = [...images, ...images];
+
   return (
     <div className="w-full relative overflow-hidden mt-9 py-12 bg-white">
       <motion.div
         className="flex gap-16 pr-16"
         transition={{
-          duration: 10,
+          duration: 20, // slower to show all logos before loop
           ease: "linear",
           repeat: Infinity,
         }}
-        initial={{ transform: "translateX(0%)" }}
-        animate={{ transform: "translateX(-50%)" }}
+        initial={{ x: "0%" }}
+        animate={{ x: "-100%" }} // scroll full width
       >
-        {images.map(({ src, alt }, index) => (
-           <Image
-             key={index}
-            src={src}
-            alt={alt}
-           width={90}
-          height={90}
-       className="flex-none w-[90px] h-[90px] object-contain"
-  />
-        ))}
-        {images.map(({ src, alt }, index) => (
+        {scrollingImages.map(({ src, alt }, index) => (
           <Image
-            key={`dup-${index}`}
+            key={index}
             src={src}
             alt={alt}
             width={90}
