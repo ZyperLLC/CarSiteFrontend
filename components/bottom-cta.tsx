@@ -1,6 +1,15 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
 
 export default function BottomCTA() {
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push("/select")
+  }
+
   return (
     <section className="bg-blue-600 py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -16,7 +25,12 @@ export default function BottomCTA() {
         </p>
 
         {/* CTA Button - Customize button text here */}
-        <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg font-medium">Post Your Ad</Button>
+        <Button
+          onClick={handleClick}
+          className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg font-medium"
+        >
+          Post Your Ad
+        </Button>
       </div>
     </section>
   )
