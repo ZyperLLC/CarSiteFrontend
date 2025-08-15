@@ -10,7 +10,8 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
   // Hide header on /select
   const shouldHideHeader =
-    pathname.startsWith("/select")
+    pathname.startsWith("/select")  ||
+    pathname.startsWith("/dealer-dashboard");
 
 
    // Pages where header, footer, and CTA should be hidden
