@@ -136,7 +136,7 @@ export default function FeaturedListings() {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center bg-gray-50 p-6 rounded-lg shadow-sm">
+        <div className="flex flex-col md:flex-row justify-between items-center rounded-[20px] border border-[#E9EEFD] bg-gradient-to-r from-[#E9EDFF] to-[#FFFFFF] p-6 shadow-sm">
           <div className="mb-4 md:mb-0 text-center md:text-left">
             <h3 className="text-xl font-semibold text-gray-900">
               All cars on one platform — simple and reliable
