@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Header from "@/components/header";
 import {
   LayoutDashboard,
   CarFront,
@@ -75,7 +74,7 @@ export default function DealerDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Header />
+  
       {/* Mobile menu toggle */}
       <div className="md:hidden flex justify-between items-center px-4 py-2 bg-white shadow">
         <button

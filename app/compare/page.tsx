@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Header from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { X, Plus, ArrowLeft } from "lucide-react"
 import Link from "next/link"
@@ -26,7 +25,6 @@ export default function ComparePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">

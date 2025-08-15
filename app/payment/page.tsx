@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -32,7 +31,6 @@ export default function PaymentPage() {
 
   return (
     <div>
-      <Header />
 
       <div className="max-w-2xl mx-auto mt-8 px-4">
         <h2 className="text-2xl font-semibold mb-6">How would you like to pay?</h2>
