@@ -1,19 +1,15 @@
-"use client";
-
 import type { Metadata } from "next";
-import { usePathname } from "next/navigation";
 import { Sora, Space_Grotesk } from "next/font/google";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import BottomCTA from "@/components/bottom-cta";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import LayoutWrapper from "@/components/layout-wrapper";
 
 const soraFont = Sora({
   subsets: ["latin"],
   variable: "--font-sora",
   weight: "variable",
 });
+
 const spaceGroteskFont = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
@@ -27,10 +23,30 @@ export const metadata: Metadata = {
   },
   description: "TTRidz is a Marketplace to Buy and Sell new and Used Cars.",
   keywords: [
-    "car", "cars", "SUV", "sedan", "hatchback", "pickup", "truck", "buy car", "sell car",
-    "used car", "new car", "car marketplace", "car dealership", "car listings",
-    "car sales", "car buying", "car selling", "car search", "car search engine",
-    "car reviews", "car prices", "car deals", "car offers", "car inventory",
+    "car",
+    "cars",
+    "SUV",
+    "sedan",
+    "hatchback",
+    "pickup",
+    "truck",
+    "buy car",
+    "sell car",
+    "used car",
+    "new car",
+    "car marketplace",
+    "car dealership",
+    "car listings",
+    "car sales",
+    "car buying",
+    "car selling",
+    "car search",
+    "car search engine",
+    "car reviews",
+    "car prices",
+    "car deals",
+    "car offers",
+    "car inventory"
   ],
   category: "Business",
   metadataBase: new URL("https://www.ttridz.com"),
@@ -43,9 +59,9 @@ export const metadata: Metadata = {
         url: "/logo.png",
         alt: "TTRidz Logo",
         width: 1200,
-        height: 630,
-      },
-    ],
+        height: 630
+      }
+    ]
   },
   twitter: {
     title: "TTRidz | Car Marketplace",
@@ -55,24 +71,14 @@ export const metadata: Metadata = {
         url: "/logo.png",
         alt: "TTRidz Logo",
         width: 1200,
-        height: 630,
-      },
+        height: 630
+      }
     ],
-    card: "summary_large_image",
-  },
+    card: "summary_large_image"
+  }
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const pathname = usePathname();
-
-  // Only hide the header on /select
-  const hideHeaderOn = ["/select", "/dealer-dashboard"];
-
-  const shouldHideHeader = hideHeaderOn.includes(pathname);
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
       <html lang="en">
@@ -84,10 +90,7 @@ export default function RootLayout({
         <body
           className={`${soraFont.variable} ${spaceGroteskFont.variable} antialiased`}
         >
-          {!shouldHideHeader && <Header />}
-          {children}
-          <BottomCTA />
-          <Footer />
+          <LayoutWrapper>{children}</LayoutWrapper>
         </body>
       </html>
     </ClerkProvider>
