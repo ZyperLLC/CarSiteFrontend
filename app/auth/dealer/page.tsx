@@ -3,7 +3,8 @@ import { SignIn } from "@clerk/nextjs";
 export default function DealerSignInPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-white">
-      <SignIn afterSignInUrl="/sell" />
+      <SignIn afterSignInUrl="/dealer-dashboard" />
+      {/* forceRedirectUrl="/dealer-dashboard" */}
     </div>
   );
 }

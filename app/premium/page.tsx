@@ -16,22 +16,23 @@ export default function PricingPage() {
       onClick: () => router.push("/sell?plan=prodealer"),
       isCurrent: true,
     },
-    {
-      title: "Pro Dealer",
-      price: "$49/mo",
-      features: ["Dealer badge", "Basic Support"],
-      numberOfListings: 20,
-      button: "Subscribe",
-      onClick: () => router.push("/payment?plan=prodealer"),
-      isCurrent: false,
-    },
+
     {
       title: "Elite Dealer",
-      price: "$99/mo",
-      features: ["Dealer badge", "Dashboard analytics", "Priority support", "Basic Support"],
-      numberOfListings: "Unlimited",
+      price: "$49/mo",
+      features:  ["Dealer badge", "Basic Support"],
+      numberOfListings: 20,
       button: "Subscribe",
       onClick: () => router.push("/payment?plan=elitedealer"),
+      isCurrent: false,
+    },
+      {
+      title: "Pro Dealer",
+      price: "$99/mo",
+      features: ["Dealer badge", "Dashboard analytics", "Priority support", "Basic Support"] ,
+      numberOfListings: "Unlimited",
+      button: "Subscribe",
+      onClick: () => router.push("/payment?plan=prodealer"),
       isCurrent: false,
     },
   ];
@@ -48,7 +49,7 @@ export default function PricingPage() {
     planFeatures.includes(feature);
 
   /*
-    Carousel logic below applies only on mobile 
+    Carousel logic below applies only on mobile
     We will create a circular 3D rotating carousel.
 
     Steps:

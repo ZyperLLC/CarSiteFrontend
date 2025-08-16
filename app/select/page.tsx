@@ -124,7 +124,7 @@ export default function SignInChoice() {
               transition={{ duration: 0.3 }}
               className="md:hidden px-4 pb-4 overflow-hidden"
             >
-              <nav className="flex flex-col space-y-2">
+              <nav className="flex flex-col space-y-2 mt-10">
                 {navItems.map((item, i) => (
                   <motion.div
                     key={item.href}
