@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SellerType {
+  INDIVIDUAL
+  DEALER
+}
+
+model User {
+  id          String     @id @default(cuid())
+  email       String     @unique
+  clerkUserId String     @unique
+  firstName   String?
+  lastName    String?
+  imageUrl    String?
+  type        SellerType @default(INDIVIDUAL)
+
+  username    String?
+  address     String?
+  dealerName  String?
+  location    String?
+  description String?
+  phone       String?
+  whatsapp    String?
+  totalCars   Int?    @default(0)
+
+  // Relations
+  cars   Car[]
+  plan   Plan?   @relation(fields: [planId], references: [id])
+  planId String?
+
+  seller Seller? // just point to Seller, no fields here!
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Seller {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  name        String
+  description String?
+
+  // Relation (one-to-one, userId must be unique)
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Car {
+  id          String  @id @default(cuid())
+  title       String
+  description String
+  price       Float
+  imageUrl    String?
+  mileage     Int?
+  year        Int?
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Plan {
+  id          String @id @default(cuid())
+  name        String // e.g., Free, Elite Dealer, Pro Dealer
+  maxListings Int // Free = 3, Elite = 20, Pro = 9999
+  price       Float  @default(0.0)
+
+  users User[]
+}

@@ -10,20 +10,17 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
   // Hide all layout parts (Header, Footer, BottomCTA)
   const shouldHideAll =
-    pathname.startsWith("/auth/individual") ||
-    pathname.startsWith("/auth/dealer") ||
+    pathname.startsWith("/sign-in") ||
+    pathname.startsWith("/sign-up") ||
+    pathname.startsWith("/onboarding") ||
     pathname.startsWith("/payment");
 
   // Hide Header + BottomCTA (but keep Footer)
-  const shouldHideHeaderAndCTA = pathname.startsWith("/dealer-dashboard");
-;
-
-  // Hide only Header
-  const shouldHideHeaderOnly = pathname.startsWith("/select");
+  const shouldHideHeaderAndCTA = pathname.startsWith("/sellers") || pathname.startsWith("/select");
 
   return (
     <>
-      {!shouldHideAll && !shouldHideHeaderOnly && !shouldHideHeaderAndCTA && <Header />}
+      {!shouldHideAll && !shouldHideHeaderAndCTA && <Header />}
       {children}
       {!shouldHideAll && !shouldHideHeaderAndCTA && <BottomCTA />}
       {!shouldHideAll && <Footer />}

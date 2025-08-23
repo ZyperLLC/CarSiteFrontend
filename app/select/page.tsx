@@ -4,14 +4,19 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import { Search, Menu, X, CheckCircle } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
 
 export default function SignInChoice() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [confirmation, setConfirmation] = useState<"individual" | "dealer" | null>(null);
   const router = useRouter();
   const { isSignedIn } = useUser();
 
@@ -19,17 +24,6 @@ export default function SignInChoice() {
     e.preventDefault();
     router.push(`/browse?query=${encodeURIComponent(searchQuery.trim())}`);
     setMenuOpen(false);
-  };
-
-  const handleContinue = (role: "individual" | "dealer") => {
-    if (isSignedIn) {
-      setConfirmation(role);
-      setTimeout(() => {
-        router.push("/dealer-dashboard");
-      }, 1500);
-    } else {
-      router.push(`/auth/${role}?redirect_url=/select`);
-    }
   };
 
   // Animation variants
@@ -46,7 +40,10 @@ export default function SignInChoice() {
   const navItems = [
     { label: "Browse Cars", href: "/browse" },
     { label: "Dealers", href: "/dealers" },
-    { label: isSignedIn ? "Dealer Dashboard" : "Sell Your Car", href: isSignedIn ? "/dealer-dashboard" : "/select" },
+    {
+      label: isSignedIn ? "Dealer Dashboard" : "Sell Your Car",
+      href: isSignedIn ? "/dealer-dashboard" : "/select",
+    },
     { label: "About", href: "/about" },
     { label: "Help", href: "/help" },
   ];
@@ -149,7 +146,7 @@ export default function SignInChoice() {
         </AnimatePresence>
       </header>
 
-      {/* Body (kept same as before) */}
+      {/* Body */}
       <main className="flex-grow px-4 py-10 flex flex-col items-center space-y-10">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold">Sell Your Car Fast on TTRIDZ</h1>
@@ -160,7 +157,9 @@ export default function SignInChoice() {
           </p>
         </div>
 
-        <h2 className="text-xl font-semibold text-center">🚀 Step 1: Choose Your Seller Type</h2>
+        <h2 className="text-xl font-semibold text-center">
+          🚀 Step 1: Choose Your Seller Type
+        </h2>
 
         {/* Cards */}
         <div className="flex flex-wrap justify-center gap-4 w-full max-w-4xl">
@@ -180,20 +179,18 @@ export default function SignInChoice() {
                   ? "Selling your personal car?"
                   : "Have multiple vehicles to list?"}
               </p>
-              <Button
-                onClick={() => handleContinue(role as "individual" | "dealer")}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                disabled={confirmation === role}
-              >
-                {confirmation === role ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    Already Signed In
-                  </span>
-                ) : (
-                  "Continue →"
-                )}
-              </Button>
+
+              <SignedOut>
+                <SignInButton mode="modal">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                    Continue →
+                  </Button>
+                </SignInButton>
+              </SignedOut>
+
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </motion.div>
           ))}
         </div>

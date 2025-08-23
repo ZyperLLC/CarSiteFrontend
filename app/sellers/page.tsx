@@ -9,10 +9,11 @@ import {
   Menu,
   X as XIcon,
 } from "lucide-react";
-import DealerDashboardPage from "@/app/elite-dealer-dashboard/page";
+import DealerDashboardPage from "@/app/elite-dealer-dashboard/page"; // adjust path as needed
 import PricingPage from "@/app/premium/page";
-import CarListing from "@/components/carlistingdashboard";
-import DealerAnalytics from "@/components/DealerAnalytics";
+import CarListing from "@/components/carlistingdashboard"; // adjust path as needed
+import DealerAnalytics from "@/components/DealerAnalytics"; // adjust path as needed
+import { SignedIn, UserButton } from "@clerk/nextjs";
 
 
 type Car = {
@@ -29,7 +30,7 @@ type Car = {
 
 const LOCAL_STORAGE_KEY = "dealerCars";
 
-export default function DealerDashboard() {
+export default function Sellers() {
   const [currentPage, setCurrentPage] = useState<string>("Dashboard");
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
@@ -74,16 +75,15 @@ export default function DealerDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-
       {/* Mobile menu toggle */}
-      <div className="md:hidden flex justify-between items-center px-4 py-2 bg-white shadow">
-        <button
+        <div className="md:hidden flex justify-between items-center px-4 py-2 bg-white shadow">
+         <button
           onClick={() => setIsSidebarOpen((prev) => !prev)}
           className="text-[#0B0F3B] flex items-center gap-2"
           aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
         >
           {isSidebarOpen ? <XIcon className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          {/* <span className="font-medium">{isSidebarOpen ? "Close" : "Menu"}</span> */}
+          <span className="font-medium">{isSidebarOpen ? "Close" : "Menu"}</span>
         </button>
       </div>
       <main className="flex min-h-[calc(100vh-4rem)]">
@@ -109,6 +109,9 @@ export default function DealerDashboard() {
                 {name}
               </button>
             ))}
+            <SignedIn>
+            <UserButton />
+          </SignedIn>
           </nav>
         </aside>
 
