@@ -179,7 +179,6 @@ export default function SignInChoice() {
                   ? "Selling your personal car?"
                   : "Have multiple vehicles to list?"}
               </p>
-
               <SignedOut>
                 <SignInButton mode="modal">
                   <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">

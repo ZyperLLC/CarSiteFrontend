@@ -12,11 +12,11 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   const shouldHideAll =
     pathname.startsWith("/sign-in") ||
     pathname.startsWith("/sign-up") ||
-    pathname.startsWith("/onboarding") ||
     pathname.startsWith("/payment");
 
   // Hide Header + BottomCTA (but keep Footer)
-  const shouldHideHeaderAndCTA = pathname.startsWith("/sellers") || pathname.startsWith("/select");
+  const shouldHideHeaderAndCTA = pathname.startsWith("/sellers") || pathname.startsWith("/select") ||
+    pathname.startsWith("/onboarding");
 
   return (
     <>
