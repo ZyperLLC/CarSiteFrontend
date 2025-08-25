@@ -163,7 +163,21 @@ body {
   }
 }
 
-/* Make Clerk SignIn + SignUp modal overlays blurry + dimmed */
-.cl-modalOverlay {
-  @apply fixed inset-0 bg-black/70 backdrop-blur-sm z-50;
+/* globals.css */
+.cl-rootBox {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
+
+/* Blur the background when modal is open */
+.cl-modalBackdrop {
+  backdrop-filter: blur(8px) !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Make sure the modal is centered */
+.cl-card {
+  margin: auto !important;
+}
+
