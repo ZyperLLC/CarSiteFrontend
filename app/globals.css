@@ -176,8 +176,20 @@ body {
   background: rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Make sure the modal is centered */
+
+/* Force Clerk modal to be centered on all devices */
+.cl-modal {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  inset: 0 !important; /* cover full screen so flex centering works */
+}
+
+/* Ensure modal card doesn't stretch full width on mobile */
 .cl-card {
   margin: auto !important;
+  max-width: 90% !important; /* keeps it looking nice */
+  border-radius: 1rem !important; /* optional: more rounded */
 }
+
 
