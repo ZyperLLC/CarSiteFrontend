@@ -16,7 +16,6 @@ import DealerAnalytics from "@/components/DealerAnalytics";
 import {
   SignedIn,
   SignedOut,
-  SignOutButton,
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
@@ -41,6 +40,7 @@ export default function Sellers() {
   const [subscribed, setSubscribed] = useState<boolean>(false);
   const [cars, setCars] = useState<Car[]>([]);
 
+  // Load cars from localStorage
   useEffect(() => {
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -53,6 +53,7 @@ export default function Sellers() {
     }
   }, []);
 
+  // Save cars to localStorage
   useEffect(() => {
     try {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cars));
@@ -77,14 +78,7 @@ export default function Sellers() {
       {/* Mobile top bar */}
       <div className="md:hidden flex justify-between items-center px-4 py-2 bg-white shadow">
         <SignedIn>
-          <div className="flex items-center gap-3">
-            <UserButton afterSignOutUrl="/" />
-            <SignOutButton>
-              <button className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded">
-                Sign out
-              </button>
-            </SignOutButton>
-          </div>
+          <UserButton afterSignOutUrl="/" />
         </SignedIn>
 
         <SignedOut>

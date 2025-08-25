@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm, SubmitHandler, FieldErrors } from "react-hook-form"
-import { onboardingSchema } from "@/lib/schemas"
-import { useRouter } from "next/navigation"
-import { completeOnboardingAction } from "@/lib/actions"
-import { toast } from "sonner"
-import { Loader2 } from "lucide-react"
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
+import { onboardingSchema } from "@/lib/schemas";
+import { useRouter } from "next/navigation";
+import { completeOnboardingAction } from "@/lib/actions";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 import {
   Card,
@@ -16,22 +16,22 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
-type Inputs = z.infer<typeof onboardingSchema>
+type Inputs = z.infer<typeof onboardingSchema>;
 
 export default function OnboardingForm() {
-  const router = useRouter()
+  const router = useRouter();
 
   const {
     register,
@@ -42,30 +42,32 @@ export default function OnboardingForm() {
   } = useForm<Inputs>({
     resolver: zodResolver(onboardingSchema),
     defaultValues: { seller: "individual" },
-  })
+  });
 
-  const sellerType = watch("seller")
+  const sellerType = watch("seller");
 
   const processForm: SubmitHandler<Inputs> = async (data) => {
-    const result = await completeOnboardingAction(data)
+    try {
+      const result = await completeOnboardingAction(data);
 
-    if (result?.error) {
-      toast.error(result.error)
-      return
+      if (result?.error) {
+        toast.error(result.error);
+        return;
+      }
+
+      // ✅ Success flow
+      toast.success("Welcome onboard!");
+      // redirect after metadata is saved, middleware will now allow /sellers
+      router.push("/sellers");
+    } catch (err) {
+      toast.error("Something went wrong. Please try again.");
     }
-
-    // ✅ success toast BEFORE navigation
-    toast.success("Welcome Onboard!")
-
-    // ✅ always redirect to /sellers
-    router.push("/sellers")
-    router.refresh()
-  }
+  };
 
   const individualErrors =
-    errors as FieldErrors<Extract<Inputs, { seller: "individual" }>>
+    errors as FieldErrors<Extract<Inputs, { seller: "individual" }>>;
   const dealerErrors =
-    errors as FieldErrors<Extract<Inputs, { seller: "dealer" }>>
+    errors as FieldErrors<Extract<Inputs, { seller: "dealer" }>>;
 
   return (
     <>
@@ -119,7 +121,10 @@ export default function OnboardingForm() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label>First Name</Label>
-                    <Input {...register("firstName")} placeholder="Enter first name" />
+                    <Input
+                      {...register("firstName")}
+                      placeholder="Enter first name"
+                    />
                     {individualErrors.firstName?.message && (
                       <p className="text-xs text-red-400">
                         {individualErrors.firstName.message}
@@ -128,7 +133,10 @@ export default function OnboardingForm() {
                   </div>
                   <div>
                     <Label>Last Name</Label>
-                    <Input {...register("lastName")} placeholder="Enter last name" />
+                    <Input
+                      {...register("lastName")}
+                      placeholder="Enter last name"
+                    />
                     {individualErrors.lastName?.message && (
                       <p className="text-xs text-red-400">
                         {individualErrors.lastName.message}
@@ -159,7 +167,10 @@ export default function OnboardingForm() {
 
                 <div>
                   <Label>WhatsApp Number</Label>
-                  <Input {...register("whatsapp")} placeholder="Enter WhatsApp number" />
+                  <Input
+                    {...register("whatsapp")}
+                    placeholder="Enter WhatsApp number"
+                  />
                   {individualErrors.whatsapp?.message && (
                     <p className="text-xs text-red-400">
                       {individualErrors.whatsapp.message}
@@ -183,7 +194,10 @@ export default function OnboardingForm() {
               <div className="space-y-4">
                 <div>
                   <Label>Dealer Name</Label>
-                  <Input {...register("dealerName")} placeholder="Enter dealer name" />
+                  <Input
+                    {...register("dealerName")}
+                    placeholder="Enter dealer name"
+                  />
                   {dealerErrors.dealerName?.message && (
                     <p className="text-xs text-red-400">
                       {dealerErrors.dealerName.message}
@@ -236,7 +250,10 @@ export default function OnboardingForm() {
 
                 <div>
                   <Label>WhatsApp Number</Label>
-                  <Input {...register("whatsapp")} placeholder="Enter WhatsApp number" />
+                  <Input
+                    {...register("whatsapp")}
+                    placeholder="Enter WhatsApp number"
+                  />
                   {dealerErrors.whatsapp?.message && (
                     <p className="text-xs text-red-400">
                       {dealerErrors.whatsapp.message}
@@ -251,7 +268,6 @@ export default function OnboardingForm() {
             <Button
               size="sm"
               type="submit"
-              variant="secondary"
               disabled={isSubmitting}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white"
             >
@@ -261,5 +277,5 @@ export default function OnboardingForm() {
         </Card>
       </form>
     </>
-  )
+  );
 }

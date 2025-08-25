@@ -3,52 +3,55 @@ import { NextRequest, NextResponse } from "next/server";
 
 const ONBOARDING_ROUTE = "/onboarding";
 const SELLERS_ROUTE = "/sellers";
-const PUBLIC_ROUTES = ["/"];
+const PUBLIC_ROUTES = ["/", "/sign-in", "/sign-up"];
 const PROTECTED_ROUTES = ["/profile", "/sellers", "/onboarding"];
-
-function isPublicRoute(pathname: string) {
-  return PUBLIC_ROUTES.some((route) => pathname.startsWith(route));
-}
-
-function isProtectedRoute(pathname: string) {
-  return PROTECTED_ROUTES.some((route) => pathname.startsWith(route));
-}
 
 type PublicMetadata = {
   onboardingComplete?: boolean;
   [key: string]: any;
 };
 
+function isPublicRoute(pathname: string) {
+  return PUBLIC_ROUTES.some((route) => pathname === route);
+}
+
+function isProtectedRoute(pathname: string) {
+  return PROTECTED_ROUTES.some((route) => pathname.startsWith(route));
+}
+
 export default withClerkMiddleware((req: NextRequest) => {
   const { userId, sessionClaims } = getAuth(req);
   const publicMetadata: PublicMetadata = sessionClaims?.publicMetadata || {};
   const url = new URL(req.url);
+  const pathname = url.pathname;
 
-  // 🔒 If not logged in and trying to access a protected route → redirect to sign-in
-  if (!userId && isProtectedRoute(url.pathname)) {
+  // 🔒 Not logged in → block protected routes
+  if (!userId && isProtectedRoute(pathname)) {
     return NextResponse.redirect(new URL("/sign-in", req.url));
   }
 
-  // 🛠 If logged in but onboarding not complete → force /onboarding
+  // 🛠 Logged in but onboarding not complete
   if (userId && !publicMetadata?.onboardingComplete) {
-    if (url.pathname !== ONBOARDING_ROUTE) {
+    // allow user to stay on onboarding
+    if (pathname !== ONBOARDING_ROUTE) {
       return NextResponse.redirect(new URL(ONBOARDING_ROUTE, req.url));
     }
+    return NextResponse.next();
   }
 
-  // 🚀 If onboarding is complete:
+  // 🚀 Logged in + onboarding complete
   if (userId && publicMetadata?.onboardingComplete) {
-    // → Prevent access to /onboarding
-    if (url.pathname === ONBOARDING_ROUTE) {
+    // prevent access to onboarding again
+    if (pathname === ONBOARDING_ROUTE) {
       return NextResponse.redirect(new URL(SELLERS_ROUTE, req.url));
     }
-    // → Redirect root "/" to /sellers
-    if (url.pathname === "/") {
+    // root → sellers
+    if (pathname === "/") {
       return NextResponse.redirect(new URL(SELLERS_ROUTE, req.url));
     }
   }
 
-  // ✅ Allow access otherwise
+  // ✅ otherwise allow
   return NextResponse.next();
 });
 
