@@ -88,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <meta name="robots" content="index, follow" />
         </head>
         <body
-          className={`${soraFont.variable} ${spaceGroteskFont.variable} antialiased overflow-hidden`}
+          className={`${soraFont.variable} ${spaceGroteskFont.variable} antialiased `}
         >
           <LayoutWrapper>{children}</LayoutWrapper>
         </body>
